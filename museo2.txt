@@ -1,0 +1,112 @@
+db.coleccion.insertMany([
+{
+_id: "Coleccion2", 
+origen: "Personal", 
+descripcion: "Colección de arte ruprestre de Mar del Plata", 
+historia: "Colección especial de la Municipalidad de General Pueyrredon", 
+telefono: "0233-222222", 
+persona_contacto: "Matias Spoliansky",
+direccion:
+{
+	calle: "Moreno", 
+	numero: 970, 
+	localidad: "Mar del Plata", 
+	municipio: "General Pueyrredon", 
+	provincia: "Buenos Aires", 
+	pais: "Argentina"
+} 
+},
+{
+_id: "Coleccion3", 
+origen: "Personal", 
+descripcion: "Colección de arte ruprestre de Mar del Plata", 
+historia: "Colección especial de la Municipalidad de General Pueyrredon", 
+telefono: "0233-222222", 
+persona_contacto: "Matias Spoliansky",
+direccion:
+{
+	calle: "Moreno", 
+	numero: 970, 
+	localidad: "Mar del Plata", 
+	municipio: "General Pueyrredon", 
+	provincia: "Buenos Aires", 
+	pais: "Argentina"
+} 
+}
+])
+
+db.coleccion.updateMany({}, {$set: {persona_contacto: "Federico Potilinski"}})
+
+db.oda.insert(
+{
+	_id:"00000001",
+	año:1826,
+	titulo:"Aun Aprendo",
+	descripcion:"Autoretrato de Francisco de Goya",
+	cultura: "Española",
+	epoca: "Modernidad",
+	tipo:"Pintura",
+	artista:"Goya, Francisco",
+	tipo_pintura:"Oleo",
+	material:"Aceite",
+	estilo_pintura:"Lienzo",
+	historia:{
+		creacion:"Francisco de Goya, auténtico pilar de la modernidad, se autorretrata a sus ochenta años en su destierro de Burdeos bajo la leyenda de Aun aprendo, toda una inspiradora declaración de intenciones para el arte que había de venir"
+	}
+}
+)
+
+db.oda.insert(
+{
+	_id:"00000002",
+	año:1777,
+	titulo:"El quitasol",
+	descripcion:"Pintura galante realizada por Goya",
+	cultura: "Española",
+	epoca: "Modernidad",
+	tipo:"Pintura",
+	artista:"Goya, Francisco",
+	tipo_pintura:"Oleo",
+	material:"Aceite",
+	estilo_pintura:"Lienzo",
+	historia:{
+		curiosidades:"Probablemente esta escena esté inspirada en el cuadro Vertumno y Pomona de Jean Ranc"
+	}
+}
+)
+
+db.movies.insert({
+_title: "Fight Club",
+writer: "Chuck Palahniuk",
+year: 1999,
+actors: [
+  "Brad Pitt",
+  "Edward Norton"
+]
+}
+)
+
+db.artista.insert(
+{
+	_id:"Goya, Francisco",
+	nombre:"Francisco de Goya",
+	fecha_nacimiento:"30/03/1746",
+	fecha_fallecimiento:"16/04/1828",
+	pais:"España",
+	epoca:"Modernismo",
+	estilo_principal:"Rococó",
+	descripcion:"Su obra abarca la pintura de caballete y mural, el grabado y el dibujo. Su estilo evolucionó desde el rococó, pasando por el neoclasicismo, hasta el prerromanticismo, siempre interpretados de una forma personal y original,2​ y siempre con un rasgo subyacente de naturalismo, del reflejo de la realidad sin una visión idealista que la edulcore ni desvirtúe, donde es igualmente importante el mensaje ético",
+	ODAS:[
+	{_identificadorODA:"00000001",
+	titulo:"Aun Aprendo"},
+	{_identificadorODA:"00000002",
+	titulo:"El Quitasol"}
+	]
+}
+)
+
+
+
+
+
+db.coleccion.remove({})

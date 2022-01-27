@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head> 
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>ESCAPE WINCLAP!</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/business-frontpage.css" rel="stylesheet">
+  
+  
+  
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #1C3C50;>
+    <div class="container">
+      <a class="navbar-brand" href="#"><img src="logo.png"</img></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="bg-secondary py-5 mb-5">
+    <div class="container h-100" >
+      <div class="row h-100 align-items-center" >
+        <div class="col-lg-12">
+          <h1 class="display-4 text-white mt-5 mb-2"><img src="escape.png" class="rounded" alt="..."></h1>
+          <p class="lead mb-5 text-white-50">¿Te animás a escapar?</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <div class="container">
+<div class="card text mb-3">
+  <div id="pistas" class="card-header text-white bg-dark">
+  ¡Bienvenid@!
+  </div>
+  <div class="card-body">
+	<div class="text-center">
+	<p class="lead mb-5 text-50">Estás por entrar en un juego en donde la lógica y el ingenio son imprescindibles para escapar. Recuerda que todo puede ser una pista útil. Este es un trabajo en equipo! Nunca lo olvides.</p>
+		<video controls width="760" height="400" src="video.mp4" controls>
+      <p>Your browser doesn't support HTML5 video. Here is a <a href="video.mp4">link to the video</a> instead.</p> 
+    </video>
+		
+
+<p class="lead mb-5 text-50"><br>¿Podrán encontrar a Rafi Stilman Cohen?</p>
+
+<p class="lead mb-5 text-50"><br>Para empezar, cada jugador debe elegir un color "Azul o blanco". Atención! Es importante que no elijan el mismo color, sino no podrán llegar al objetivo!</p>
+
+<p class="lead mb-5 text-50"><i>Recuerden avanzar siempre juntos y no separarse.</i></p>
+<br>
+<a href="viajes1.html" type="button" class="btn btn-primary btn-lg btn-block"><b>AZUL</b></a>
+<a href="viajes2.html" type="button" class="btn btn-light btn-lg btn-block"><b>BLANCO</b></a>
+	</div>
+	</div>
+    <!-- /.row -->
+
+
+  </div>
+   </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg" style="background-color: #1C3C50;>
+    <div class="container">
+      <p class="m-0 text-center text-white"><img src="escapemini.png"</img></p>
+    </div>
+    <!-- /.container -->
+  </footer>
+  
+    <script>
+	function valida(f) {
+	  var ok = false;
+	  var msg = "¡Respuesta incorrecta!";
+		
+	  if(f.jugador2.value == "RESPUESTA")
+	  {
+		ok = true;
+	  }
+	  if(ok==true)
+		location.replace("index.html");
+	  if(ok == false)
+		alert(msg);
+	  return ok;
+	  
+	}
+	</script>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+
+
+</body>
+
+</html>

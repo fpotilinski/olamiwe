@@ -1,0 +1,51 @@
+
+// Clientes por nombre de usuario
+CREATE TABLE clientes_por_id(nombre_usuario text, cuenta_facebook text, nacionalidad text, fecha_nacimiento timeuuid, fecha_registro timeuuid,
+PRIMARY KEY(nombre_usuario));
+
+// Clientes por cuenta de Facebook
+CREATE TABLE clientes_por_facebook(nombre_usuario text, cuenta_facebook text, nacionalidad text, fecha_nacimiento timeuuid, fecha_registro timeuuid,
+PRIMARY KEY(cuenta_facebook));
+
+// Ebooks comprados por un usuario ordenados descendentemente por fecha de comprados
+CREATE TABLE compras_por_usuario(nombre_usuario text, fecha_compra timeuuid, titulo text, precio double,
+PRIMARY KEY(nombre_usuario, fecha_compra)) WITH CLUSTERING ORDER BY(fecha_compra DESC);
+
+// Ebooks lanzados en un mes ordenados por fecha de lanzamiento y por precio de manera ascendente
+CREATE TABLE ebooks_lanzados_mes(isbn text, titulo text, autor text, resumen text, fecha_lanzamiento timeuuid, precio double, genero set<text>, mes int, anio int,
+PRIMARY KEY((mes, anio), precio, titulo)) WITH CLUSTERING ORDER BY(precio DESC);
+
+
+
+INSERT INTO clientes_por_id(nombre_usuario, cuenta_facebook, nacionalidad, fecha_nacimiento, fecha_registro) VALUES ('fpotilinski', 'Federico Potilinski', 'argentino', now(), now());
+
+INSERT INTO clientes_por_facebook(nombre_usuario, cuenta_facebook, nacionalidad, fecha_nacimiento, fecha_registro) VALUES ('fpotilinski', 'Federico Potilinski', 'argentino', now(), now());
+
+
+INSERT INTO compras_por_usuario(nombre_usuario, fecha_compra, titulo, precio) VALUES ('fpotilinski', now(), 'El Senor de los Anillos', 1000.45);
+
+INSERT INTO compras_por_usuario(nombre_usuario, fecha_compra, titulo, precio) VALUES ('fpotilinski', now(), 'Harry Potter', 200.45);
+
+INSERT INTO ebooks_lanzados_mes(isbn, titulo, autor, resumen, fecha_lanzamiento, precio, genero, mes, anio) VALUES
+('111111111', 'Harry Potter', 'J.K. Rowling', 'Harry Potter es un mago...', now(), 200.45, {'juvenil', 'fantasia'}, 12, 2020);
+
+
+INSERT INTO ebooks_lanzados_mes(isbn, titulo, autor, resumen, fecha_lanzamiento, precio, genero, mes, anio) VALUES
+('111111111', 'El Senor de los Anillos', 'Tolkien', 'Freddo es sobrino de Bilbo...', now(), 10020.45, {'juvenil', 'fantasia'}, 12, 2020);
+
+
+
+ISBN (identificador único del e-Book), título, autor, resumen, fecha de lanzamiento, precio y género (es opcional y puede ser más
+Laboratorio: Fecha:
+Alumno:
+Legajo: Nro PC
+Base de Datos II
+de uno). Un e-Book puede ser clasificado en cero, uno o varios géneros. Puede haber más de un autor para un e-Book y un autor podría haber escrito varios e-Books.
+
+
+
+Creo el keyspace
+CREATE KEYSPACE libreria WITH REPLICATION = {'class': 'SimpleStrategy', 'replication_factor': '1'};
+
+
+

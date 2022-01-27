@@ -1,0 +1,209 @@
+artista{
+	id
+	nombre
+	fecha_nacimiento
+	fecha_fallecimiento
+	pais
+	epoca
+	estilo_principal
+	descripcion
+	oda [
+		{id, titulo, clasificacion}
+	]
+}
+
+
+db.artista.insertOne(
+{
+	_id: "A0001",
+	nombre: "Pablo Miró",
+	fecha_nacimiento: "01/02/1870",
+	fecha_fallecimiento: "01/02/1950",
+	pais: "España",
+	epoca: "Contemporanea",
+	estilo_principal: "Pintura",
+	descripcion: "Biografia de Pablo Miró",
+}
+)
+
+db.Oda.insertOne(
+{
+	_id: "ODA0001",
+	id_artista: "A0001",
+	artista: "Pablo Miró",
+	titulo: "Gran Obra de Pablo Miró",
+	descripcion: "Descripción de la gran obra de Pablo Miró",
+	historia: {
+		creacion: "Historia de la creación de la Gran Obra de Pablo Miró",
+		llegada_museo: "Historia de la llegada al museo de la Gran Obra de Pablo Miró",
+		perdidas: "No se informaron pérdidas significativas de esta obra",
+		robos: "Han intentado robarlo en muchas ocasiones",
+		curiosidades: "Pablo Miró era ciego de un ojo"
+	},
+	tipo_oda: "Pintura",
+	tipo_pintura: "Aceite",
+	material: "Lienzo",
+	estilo: "Libre",
+	clasificacion: "Permanente",
+	fecha_adquisicion: "01/01/1990",
+	estado: "Exhibicion",
+	costo: 15555665551,
+	id_pais: "España",
+	id_cultura: "Renacimiento"
+}
+)
+
+
+db.oda.insertOne(
+{
+	_id: "ODA0002",
+	id_artista: "A0001",
+	artista: "Pablo Miró",
+	titulo: "Gran Obra de Pablo Miró",
+	descripcion: "Descripción de la gran obra de Pablo Miró",
+	historia: {
+		creacion: "Historia de la creación de la Gran Obra de Pablo Miró",
+		llegada_museo: "Historia de la llegada al museo de la Gran Obra de Pablo Miró",
+		perdidas: "No se informaron pérdidas significativas de esta obra",
+		robos: "Han intentado robarlo en muchas ocasiones",
+		curiosidades: "Pablo Miró era ciego de un ojo"
+	},
+	tipo_oda: "Escultura",
+	tamaño: {
+		alto: 11,
+		ancho: 11,
+		volumen: 11,
+		peso: 1111
+	},
+	material: "Hierro",
+	estilo: "Libre",
+	clasificacion: "Permanente",
+	fecha_adquisicion: "01/01/1990",
+	estado: "Exhibicion",
+	costo: 15555665551,
+	id_pais: "España",
+	id_cultura: "Renacimiento"
+}
+)
+
+
+
+db.pais.insertOne({
+	_id: "España",
+	informacion: "Información del país España"
+}
+)
+
+db.cultura.insertOne({
+	_id: "Renacimiento",
+	informacion: "Información del Renacimiento"
+}
+)
+
+oda{
+	_id
+	id_artista
+	año
+	titulo
+	descripcion
+	historia{
+		creacion
+		llegada_museo
+		perdidas
+		robos
+		curiosidades
+	}
+	tipo_oda (pintura/escultura/monumento/otro)
+	
+	--pinturas
+	tipo_pintura
+	material
+	estilo
+	
+	--escultura o monumento
+	material
+	tamaño{
+		alto
+		ancho
+		volumen
+		peso
+	}
+	estilo
+	
+	--otro
+	tipo_obra
+	tamaño{
+		alto
+		ancho
+		volumen
+		peso
+	}
+	estilo
+	
+	clasificacion (coleccion permanente / prestado)
+	
+	-- si es coleccion permanente
+	fecha_adquisicion
+	estado (exhibicion / en prestamo / almacenada)
+	costo
+	
+	-- si es prestado
+	coleccion_propietaria
+	fecha_prestamo
+	fecha_devolucion
+	organismo
+	seguro_transporte
+	seguro_exhibicion
+	condiciones_transporte
+	condiciones_almacenamiento
+	
+	ref_informacion_pais
+	ref_informacion_cultura
+}
+
+pais{
+	_id
+	informacion
+}
+
+cultura{
+	_id
+	informacion
+}
+
+exhibicion{
+	_nombre
+	fecha_inicio
+	fecha_fin
+	ubicacion
+}
+
+
+db.exhibicion.insertOne({
+	_id: "Exhibición de España",
+	fecha_inicio: "28/11/2020",
+	fecha_fin: "31/12/2020",
+	ubicacion: "Museo"
+}
+)
+
+
+colecciones{
+	_nombre
+	origen (museo/personal/)
+	descripcion
+	historia
+	direccion
+	telefono
+	persona_contacto
+}
+
+
+
+
+db.oda.find({artista: "Pablo Miró"}, {titulo})
+db.artista.find({estilo_principal: "Pintura"}).count()
+db.oda.find({$and: [{tipo_oda: "Pintura"}, {id_cultura: "Renacimiento"}]}, {_id:1, titulo:1, artista:1})
+db.oda.find({estado:"Exhibicion"}, {_id:1, titulo:1, artista:1})
+db.artista.updateOne({nombre: "Pablo Miró"}, {$push: {oda: {id: "ODA0001", titulo: "Gran Obra de Pablo Miró", clasificacion: "Permanente"}}})
+db.artista.find({$and: [{fecha_fallecimiento: {$gt: "01/01/1550"}}, {oda:{ $elemMatch: {clasificacion: "Permanente"}}}]})

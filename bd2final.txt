@@ -1,0 +1,176 @@
+-- Creación de nodos persona
+CREATE (o:Persona {nombre: '', apellido: '', dni: '', direccion: '', trabajo: ''})
+
+CREATE(Federico:Persona {nombre: 'Federico', apellido: 'Potilinski', dni: 35973399, direccion: 'Gurruchaga 2150 - Palermo', trabajo: 'Programador'})
+CREATE(Jesica:Persona {nombre: 'Jesica', apellido: 'Halife', dni: 34521265, direccion: 'Camargo 851 - Villa Crespo', trabajo: 'Desempleado'})
+CREATE(Rafael:Persona {nombre: 'Rafael', apellido: 'Cuevas', dni: 23765897, direccion: 'Belaustegui 222 - Caballito', trabajo: 'Desempleado'})
+CREATE(Miguel:Persona {nombre: 'Miguel', apellido: 'Cuevas', dni: 12365259, direccion: 'Belaustegui 222 - Caballito', trabajo: 'Desempleado'})
+CREATE(Carlos:Persona {nombre: 'Carlos', apellido: 'Lopez', dni: 23652562, direccion: 'Zapiola 111 - Belgrano', trabajo: 'Empleado'})
+
+-- Relación de parentezco
+MATCH(o:Persona {nombre: 'Federico', apellido: 'Potilinski'}), (p:Persona {nombre: 'Jesica', apellido: 'Halife'})
+CREATE (o)-[:HERMANO]->(p)
+
+MATCH(o:Persona {nombre: 'Federico', apellido: 'Potilinski'}), (p:Persona {nombre: 'Rafael', apellido: 'Cuevas'})
+CREATE (o)-[:AMIGO]->(p)
+
+MATCH(o:Persona {nombre: 'Jesica', apellido: 'Halife'}), (p:Persona {nombre: 'Rafael', apellido: 'Cuevas'})
+CREATE (o)-[:PRIMO]->(p)
+
+MATCH(o:Persona {nombre: 'Miguel', apellido: 'Cuevas'}), (p:Persona {nombre: 'Rafael', apellido: 'Cuevas'})
+CREATE (o)-[:PADRE]->(p)
+
+
+-- Creación de nodos hecho
+CREATE(o:Hecho {descripcion: '', lugar:'', fecha: '', hora: ''}
+CREATE(o:Hecho {id: 1, tipo: 'Robo de casa', descripcion: 'Se robó una casa en Belgrano...', lugar: 'Belgrano', fecha: '2019-04-01', hora: '14:51'})
+CREATE(o:Hecho {id: 2, tipo: 'Robo de casa', descripcion: 'Se robó una casa en Belgrano...', lugar: 'Belgrano', fecha: '2019-04-03', hora: '12:51'})
+CREATE(o:Hecho {id: 3, tipo: 'Robo de casa', descripcion: 'Se robó una casa en Belgrano...', lugar: 'Belgrano', fecha: '2019-12-11', hora: '11:51'})
+CREATE(o:Hecho {id: 4, tipo: 'Robo de auto', descripcion: 'Se robó un vehículo en Palermo...', lugar: 'Palermo', fecha: '2020-03-02', hora: '15:51'})
+
+
+
+CREATE(o:Hecho {id: 5, tipo: 'Robo de casa', descripcion: 'Se robó una casa en Belgrano...', lugar: 'Belgrano', fecha: '2019-04-01', hora: '14:51'})
+
+-- Relación persona-hecho
+MATCH(o:Persona {nombre: 'Federico', apellido: 'Potilinski'}), (p:Hecho {id: 1})
+CREATE (p)-[:TESTIGO]->(o)
+
+MATCH(o:Persona {nombre: 'Jesica', apellido: 'Halife'}), (p:Hecho {id: 1})
+CREATE (p)-[:TESTIGO]->(o)
+
+MATCH(o:Persona {nombre: 'Rafael', apellido: 'Cuevas'}), (p:Hecho {id: 1})
+CREATE (p)-[:SOSPECHOSO]->(o)
+
+MATCH(o:Persona {nombre: 'Miguel', apellido: 'Cuevas'}), (p:Hecho {id: 1})
+CREATE (p)-[:SOSPECHOSO]->(o)
+
+MATCH(o:Persona {nombre: 'Carlos', apellido: 'Lopez'}), (p:Hecho {id: 4})
+CREATE (p)-[:SOSPECHOSO]->(o)
+
+MATCH(o:Persona {nombre: 'Jesica', apellido: 'Halife'}), (p:Hecho {id: 4})
+CREATE (p)-[:TESTIGO]->(o)
+
+
+
+
+
+MATCH(p:Hecho {nombre: 'Robo de casa'}), (o:Persona {nombre: 'Jesica', apellido: 'Halife'})
+CREATE (p)-[:SOSPECHOSO]->(o)
+
+-- Creación de nodos bienes
+CREATE(o:Bien {id:1, tipo: 'Auto', estado: 'Uso'})
+CREATE(o:Bien {id:2, tipo: 'Casa', estado: 'Alquiler'})
+CREATE(o:Bien {id:3, tipo: 'Casa', estado: 'Uso'})
+
+-- Relación bien-persona
+MATCH(p:Persona {nombre: 'Jesica', apellido: 'Halife'}), (o:Bien {id: 2})
+CREATE (o)-[:DUEÑO]->(p)
+
+MATCH(p:Persona {nombre: 'Federico', apellido: 'Potilinski'}), (o:Bien {id: 1})
+CREATE (o)-[:DUEÑO]->(p)
+
+MATCH(p:Persona {nombre: 'Miguel', apellido: 'Cuevas'}), (o:Bien {id: 3})
+CREATE (o)-[:DUEÑO]->(p)
+
+
+-- Relación hecho-bien
+MATCH(h:Hecho {id:4}), (o:Bien {id:1})
+CREATE(h)-[:ROBO]->(o)
+
+MATCH(h:Hecho {id:1}), (o:Bien {id:2})
+CREATE(h)-[:ROBO]->(o)
+
+MATCH(h:Hecho {id:2}), (o:Bien {id:2})
+CREATE(h)-[:ROBO]->(o)
+
+MATCH(h:Hecho {id:3}), (o:Bien {id:3})
+CREATE(h)-[:ROBO]->(o)
+
+
+
+-- Nodo información de un hecho
+CREATE(o:Informacion {id: 1, compromete_sospechoso: 'Si', descripcion: 'Datos brindados por testigo'})
+CREATE(o:Informacion {id: 2, compromete_sospechoso: 'Si', descripcion: 'Datos brindados por testigo'})
+CREATE(o:Informacion {id: 3, compromete_sospechoso: 'Si', descripcion: 'Datos brindados por testigo'})
+CREATE(o:Informacion {id: 4, compromete_sospechoso: 'Si', descripcion: 'Datos brindados por testigo'})
+
+-- Relación informacion-persona
+MATCH(o:Informacion {id:1}), (p:Persona {nombre: 'Federico', apellido: 'Potilinski'})
+CREATE (o)-[:TESTIGO]->(p)
+
+MATCH(o:Informacion {id:2}), (p:Persona {nombre: 'Jesica', apellido: 'Halife'})
+CREATE (o)-[:TESTIGO]->(p)
+
+MATCH(o:Informacion {id:3}), (p:Persona {nombre: 'Jesica', apellido: 'Halife'})
+CREATE (o)-[:TESTIGO]->(p)
+
+
+-- Relación hecho-información
+MATCH(h:Hecho {id: 1}), (o:Informacion {id: 1})
+CREATE(h)-[:INFORMACION]->(o)
+
+MATCH(h:Hecho {id: 1}), (o:Informacion {id: 2})
+CREATE(h)-[:INFORMACION]->(o)
+
+MATCH(h:Hecho {id: 4}), (o:Informacion {id: 3})
+CREATE(h)-[:INFORMACION]->(o)
+
+
+-- Nodo llamada
+CREATE(o:Llamada {id: 1, fecha: '2019-01-01', hora: '15:51:00'})
+CREATE(o:Llamada {id: 2, fecha: '2019-05-01', hora: '15:11:00'})
+
+-- Relación llamada-persona
+MATCH(o:Llamada {id:1}), (p:Persona {nombre: 'Miguel', apellido: 'Cuevas'})
+CREATE(o)-[:ORIGEN]->(p)
+
+MATCH(o:Llamada {id:1}), (p:Persona {nombre: 'Rafael', apellido: 'Cuevas'})
+CREATE(o)-[:DESTINO]->(p)
+
+MATCH(o:Llamada {id:2}), (p:Persona {nombre: 'Jesica', apellido: 'Halife'})
+CREATE(o)-[:ORIGEN]->(p)
+
+MATCH(o:Llamada {id:2}), (p:Persona {nombre: 'Federico', apellido: 'Potilinski'})
+CREATE(o)-[:DESTINO]->(p)
+
+
+
+Punto1
+-- Cuales son los hechos que no tienen testigos
+MATCH(h:Hecho)-[:TESTIGO]-(p:Persona)
+return h
+WHERE p is null
+return h
+
+Punto2
+-- Quienes son los sospechosos de un hecho determinado:
+MATCH (h:Hecho {id:1})-[:SOSPECHOSO]-(p:Persona)
+RETURN p.nombre as Nombre, p.apellido as Apellido
+
+Punto3
+-- Quienes son los testigos que favorecen a Carlos en el robo de un auto 
+-- Tomo que si la información aportada por el testigo no compromete al sospechoso es favorable para el (es decir, para Carlos)
+MATCH(p:Persona)<-[:TESTIGO]-(i:Informacion {compromete_sospechoso: 'No'})<-[:INFORMACION]-(h:Hecho {tipo: 'Robo de auto'})-[:SOSPECHOSO]->(o:Persona {nombre:'Carlos'})
+return p.nombre, p.apellido
+
+Punto4
+-- Cuales son los bienes que pertenecen a personas sin trabajo
+MATCH(p:Persona {trabajo: 'Desempleado'})-[:DUEÑO]-(b:Bien)
+RETURN b.id as ID, b.tipo as Tipo, b.estado as Estado, p.nombre as Nombre_Propietario, p.apellido as Apellido_Propietario
+
+Punto5
+-- Quien es el dueño del auto por el cual se lo acusa a Carlos
+MATCH(p:Persona)<-[:DUEÑO]-(o:Bien)<-[:ROBO]-(h:Hecho {tipo: 'Robo de auto'})-[:SOSPECHOSO]->(p:Persona {nombre: 'Carlos'})
+return p.nombre, p.apellido
+
+Punto6
+-- Cuantos robos de casa se produjeron en el Barrio de Belgrano entre abril y mayo de 2019?
+MATCH(h:Hecho {tipo: 'Robo de casa', lugar: 'Belgrano'})
+WHERE h.fecha >= '2019-04-01' and h.fecha <= '2019-05-31'
+return count(*)
+
+
+
+
+
