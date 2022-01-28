@@ -2,7 +2,7 @@ function valida(f) {
 	  var ok = true;
 	  var msg = "¡Respuesta incorrecta!";
 		
-	  if(document.getElementById("respuesta1").value == "THE ONLY OMNI-CHANNEL PLATFORM")
+	  if(document.getElementById("respuesta1").value == "VIAJE A TU INTERIOR")
 	  {
 		ok = true;
 	  }else{
