@@ -10,7 +10,7 @@
 	  }
 
 	  if(ok==true)
-		location.href = "campp2.html";
+		location.href = "tnel2.html";
 		f.preventDefault();
 	  
 	  if(ok == false)

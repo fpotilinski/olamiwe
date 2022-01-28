@@ -10,7 +10,7 @@ function valida(f) {
 	  }
 
 	  if(ok==true)
-		location.href = "campp1.html";
+		location.href = "tnel1.html";
 		f.preventDefault();
 	  
 	  if(ok == false)
